@@ -19,6 +19,7 @@ import {
   SpeechToTextSwitch,
   AutoSendTextSwitch,
   AutoTranscribeAudioSwitch,
+  AutoSendTimeSelector,
 } from './STT';
 
 function Speech() {
@@ -60,6 +61,11 @@ function Speech() {
         {advancedMode && (
           <div className="border-b pb-3 last-of-type:border-b-0 dark:border-gray-700">
             <AutoSendTextSwitch />
+          </div>
+        )}
+        {autoTranscribeAudio && advancedMode && (
+          <div className="border-b pb-3 last-of-type:border-b-0 dark:border-gray-700">
+            <AutoSendTimeSelector />
           </div>
         )}
         <div className="h-px bg-black/20 bg-white/20" role="none" />

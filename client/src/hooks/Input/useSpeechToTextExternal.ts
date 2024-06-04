@@ -20,6 +20,7 @@ const useSpeechToTextExternal = (onTranscriptionComplete: (text: string) => void
   const audioStream = useRef<MediaStream | null>(null);
   const audioContextRef = useRef<AudioContext | null>(null);
   const animationFrameIdRef = useRef<number | null>(null);
+  const autoSendTextTimeout = useRecoilState(store.autoSendTextTimeout)[0];
 
   const { mutate: processAudio, isLoading: isProcessing } = useSpeechToTextMutation({
     onSuccess: (data) => {
@@ -29,7 +30,7 @@ const useSpeechToTextExternal = (onTranscriptionComplete: (text: string) => void
       if (autoSendText && speechToText && extractedText.length > 0) {
         setTimeout(() => {
           onTranscriptionComplete(extractedText);
-        }, 3000);
+        }, autoSendTextTimeout * 1000);
       }
     },
     onError: () => {
