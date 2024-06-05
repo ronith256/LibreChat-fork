@@ -25,9 +25,16 @@ const useSpeechToTextExternal = (onTranscriptionComplete: (text: string) => void
   const { mutate: processAudio, isLoading: isProcessing } = useSpeechToTextMutation({
     onSuccess: (data) => {
       const extractedText = data.text;
-      setText(extractedText);
+      if (!extractedText.includes('BLANK_AUDIO')) {
+        setText(extractedText);
+      }
       setIsRequestBeingMade(false);
-      if (autoSendText && speechToText && extractedText.length > 0) {
+      if (
+        autoSendText &&
+        speechToText &&
+        extractedText.length > 0 &&
+        !extractedText.includes('BLANK_AUDIO')
+      ) {
         setTimeout(() => {
           onTranscriptionComplete(extractedText);
         }, autoSendTextTimeout * 1000);
