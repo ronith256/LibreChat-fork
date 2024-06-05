@@ -20,6 +20,7 @@ import {
   AutoSendTextSwitch,
   AutoTranscribeAudioSwitch,
   AutoSendTimeSelector,
+  ContinuousConversationSwitch,
 } from './STT';
 
 function Speech() {
@@ -44,6 +45,10 @@ function Speech() {
         <div className="h-px bg-black/20 bg-white/20" role="none" />
         <div className="border-b pb-3 last-of-type:border-b-0 dark:border-gray-700">
           <SpeechToTextSwitch />
+        </div>
+        <div className="h-px bg-black/20 bg-white/20" role="none" />
+        <div className="border-b pb-3 last-of-type:border-b-0 dark:border-gray-700">
+          <ContinuousConversationSwitch />
         </div>
         <div className="border-b pb-3 last-of-type:border-b-0 dark:border-gray-700">
           <EngineSTTDropdown />

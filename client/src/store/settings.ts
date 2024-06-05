@@ -68,6 +68,8 @@ const localStorageAtoms = {
   endpointSTT: atomWithLocalStorage('endpointSTT', 'browser'),
   endpointTTS: atomWithLocalStorage('endpointTTS', 'browser'),
   cacheTTS: atomWithLocalStorage('cacheTTS', true),
+  audioRecorderTriggerState: atomWithLocalStorage('audioRecorderTriggerState', false),
+  continuousConversationSwitch: atomWithLocalStorage('continuousConversationSwitch', false),
   voice: atomWithLocalStorage('voice', ''),
   forkSetting: atomWithLocalStorage('forkSetting', ''),
   splitAtTarget: atomWithLocalStorage('splitAtTarget', false),

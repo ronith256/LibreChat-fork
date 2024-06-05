@@ -4,3 +4,4 @@ export { default as EngineSTTDropdown } from './EngineSTTDropdown';
 export { default as DecibelSelector } from './DecibelSelector';
 export { default as AutoSendTimeSelector } from './AutoSendTimeSelector';
 export { default as AutoTranscribeAudioSwitch } from './AutoTranscribeAudioSwitch';
+export { default as ContinuousConversationSwitch } from './ContinuousConversationSwitch';

@@ -1,4 +1,6 @@
 import { useEffect, useRef } from 'react';
+import { useRecoilState } from 'recoil';
+import store from '~/store';
 
 interface CustomAudioElement extends HTMLAudioElement {
   customStarted?: boolean;
@@ -19,6 +21,7 @@ export default function useCustomAudioRef({
   setIsPlaying: (isPlaying: boolean) => void;
 }): TCustomAudioResult {
   const audioRef = useRef<CustomAudioElement | null>(null);
+  const [trigger, setTrigger] = useRecoilState<boolean>(store.audioRecorderTriggerState);
   useEffect(() => {
     let lastTimeUpdate: number | null = null;
     let sameTimeUpdateCount = 0;
@@ -29,6 +32,12 @@ export default function useCustomAudioRef({
       if (audioRef.current) {
         audioRef.current.customEnded = true;
         URL.revokeObjectURL(audioRef.current.src);
+      }
+      if (store.continuousConversationSwitch) {
+        setTrigger(true);
+        if (trigger) {
+          console.log('Trigger is true');
+        }
       }
     };
 

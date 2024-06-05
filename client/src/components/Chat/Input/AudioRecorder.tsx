@@ -4,6 +4,8 @@ import { TooltipProvider, Tooltip, TooltipTrigger, TooltipContent } from '~/comp
 import { ListeningIcon, Spinner } from '~/components/svg';
 import { useLocalize, useSpeechToText } from '~/hooks';
 import { globalAudioId } from '~/common';
+import store from '~/store';
+import { useRecoilState } from 'recoil';
 
 export default function AudioRecorder({
   textAreaRef,
@@ -17,7 +19,7 @@ export default function AudioRecorder({
   disabled: boolean;
 }) {
   const localize = useLocalize();
-
+  const [trigger, setTrigger] = useRecoilState(store.audioRecorderTriggerState);
   const handleTranscriptionComplete = (text: string) => {
     if (text) {
       const globalAudio = document.getElementById(globalAudioId) as HTMLAudioElement;
@@ -58,6 +60,14 @@ export default function AudioRecorder({
     }
     return <ListeningIcon className="stroke-gray-700 dark:stroke-gray-300" />;
   };
+
+  useEffect(() => {
+    if (trigger) {
+      console.log('Audio Recorder got triggered');
+      handleStartRecording();
+      setTrigger(false);
+    }
+  }, [trigger, setTrigger]);
 
   return (
     <TooltipProvider delayDuration={250}>
